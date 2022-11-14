@@ -1,6 +1,45 @@
+const obj =
+{
+    string: 'primitive string',
+    stringObj: new String('string object'),
+    number: 100,
+    numberObj: new Number(100),
+    nan: NaN,
+    array: [1, 2, 3],
+    arrayObj: new Array(2),
+    bool: false,
+    boolobj: new Boolean(false),
+    nul: null,
+    date: new Date(),
+    myFunc: function() {console.log("test")},
+    undef: undefined,
+    inf: Infinity,
+}
+ 
 
+// Object.assign()  - shallow copy
 
+const assignCopy = Object.assign({}, obj)
+console.log("1", obj == assignCopy );
 
+//Spreat operator - shallow copy
+
+const spreatCopy = {...obj};
+
+console.log("2", obj == spreatCopy);
+
+// JSON.parse/stringify
+
+const jsonCopy = JSON.parse(JSON.stringify(obj))
+console.log("3", obj == jsonCopy);
+
+// lodash - cloneDeep
+
+var deepCopy = _.cloneDeep(obj);
+
+console.log("3", obj == deepCopy);
+
+//custom function
 const deepClone = function(obj) {
     if (obj == null || typeof obj !== 'object') {
         return obj;
@@ -26,30 +65,4 @@ const deepClone = function(obj) {
     return clone;
 };
  
-const obj =
-{
-    string: 'primitive string',
-    stringObj: new String('string object'),
-    number: 100,
-    numberObj: new Number(100),
-    bigInt: BigInt("9007199254740991"),
-    nan: NaN,
-    array: [1, 2, 3],
-    arrayObj: new Array(2),
-    bool: false,
-    boolobj: new Boolean(false),
-    nul: null,
-    date: new Date(),
-    myFunc: function() {console.log("test")},
-    undef: undefined,
-    inf: Infinity,
-}
- 
-console.log(deepClone(obj));
-var deepCopy = _.cloneDeep(obj);
-
-console.log("1", obj == deepClone(obj));
-console.log("2", obj == {...obj});
-console.log("3", obj == Object.assign({}, obj));
-console.log("4", obj == deepCopy);
-console.log(_.cloneDeep)
+console.log("4", obj == deepClone(obj));
